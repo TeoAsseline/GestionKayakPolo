@@ -1,6 +1,7 @@
 ﻿<?php
 include_once "MatchJ.php";
 include_once "DataBase.php";
+include_once "Joueurs.php";
 ///Créer la liste des matchs
 class Matchs
 {
@@ -20,9 +21,10 @@ class Matchs
     public function afficherMatchs()
     {
         foreach ($this->matchs as $ligneValue) {
+            $listeJoueurs = new Joueurs();
+            $NBJM=$listeJoueurs->NbParticipant($ligneValue->getID());
             echo "<tr>";
             $matchj = $ligneValue->listeInfo();
-            $index=0;
             foreach ($matchj as $colValue) {
                 if($colValue==NULL){
                     echo "<td>X</td>";
@@ -30,11 +32,22 @@ class Matchs
                     echo "<td>", $colValue, "</td>";
                 }
             }
-            echo "<td><a href='./ModifMatch.php?ID=". $ligneValue->getID()."'><img class='imgB' src='./img/modifier.png' alt='Supprimer'></a></td>";
-            echo "<td><a href='./FeuilleMatch.php?ID=". $ligneValue->getID()."'><img class='imgB' src='./img/FeuilleM.png' alt='FeuilleM'></a></td>";
+            if($ligneValue->getDate() > date('Y-m-d')){
+                echo "<td><a href='./ModifMatch.php?ID=". $ligneValue->getID()."'><img class='imgB' src='./img/modifierrouge.png' alt='ModifierInterdit'></a></td>";
+            }else if($ligneValue->getResultat()!=''){
+                echo "<td><a href='./ModifMatch.php?ID=". $ligneValue->getID()."'><img class='imgB' src='./img/modifierN.png' alt='ModifierFini'></a></td>";
+            } else {
+                echo "<td><a href='./ModifMatch.php?ID=". $ligneValue->getID()."'><img class='imgB' src='./img/modifierorange.png' alt='ModifierAFaire'></a></td>";
+            }
+            if($NBJM<5){
+                echo "<td><a href='./FeuilleMatch.php?ID=". $ligneValue->getID()."'><img class='imgB' src='./img/FeuilleMorange.png' alt='FeuilleMAFaire'></a></td>";
+            }else if($ligneValue->getDate() < date('Y-m-d')){
+                echo "<td><a href='./FeuilleMatch.php?ID=". $ligneValue->getID()."'><img class='imgB' src='./img/FeuilleM.png' alt='FeuilleMFini'></a></td>";
+            } else {
+                echo "<td><a href='./FeuilleMatch.php?ID=". $ligneValue->getID()."'><img class='imgB'src='./img/FeuilleMvert.png' alt='FeuilleMFait'></a></td>";
+            }
             echo "<td><a href='./Suppression.php?TB=MatchJ&ID=".'where IDmatch='. $ligneValue->getID()."'><img class='imgB' src='./img/supprimer.png' alt='Modif'></a></td>";
             echo "</tr>";
-            $index++;
         }
     }
     ///Met à jour la liste des matchs $data

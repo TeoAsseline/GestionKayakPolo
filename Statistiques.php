@@ -24,7 +24,7 @@ if (!isset($_SESSION['nom'])){
                 <a href="./accueil.php">Accueil</a>
                 <a href="./ListeJoueur.php">Liste des joueurs</a>
                 <a href="./ListeMatch.php">Liste des matchs</a>
-                <a href="./Statistiques.php">Statistiques</a>
+                <a href="./Statistiques.php" class="menuA">Statistiques</a>
             </nav>
             </div>
             <!--Deconnexion-->
@@ -84,7 +84,6 @@ if (!isset($_SESSION['nom'])){
                     </thead>
                     <tbody>
                         <?php 
-                            include './classe/Joueurs.php';
                             $listeJoueurs = new Joueurs();
                             ///Selection de tous les joueurs
                             $listeJoueurs->tousLesJoueurs();

@@ -90,8 +90,8 @@ class Joueurs
     {
         try {
             $pdo = Database::getInstance()->getPDO();
-            $stmt = $pdo->prepare("SELECT avg(P.Performance) FROM MatchJ M,Participer P,Joueur J 
-            WHERE M.IDmatch=P.IDmatch AND J.NumLicense=$id AND J.NumLicense=P.Numlicense;");
+            $stmt = $pdo->prepare("SELECT avg(P.Performance) FROM Participer P,Joueur J 
+            WHERE J.NumLicense=$id AND J.NumLicense=P.Numlicense;");
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result;

@@ -53,6 +53,9 @@ header a{
   border:solid 2px;
   border-radius:5px;
 }
+.menuA{
+  border:solid 4px;
+}
 .deconnecter {
   padding:15px;
 }
@@ -109,6 +112,8 @@ header a{
 table{
   border-collapse: collapse;
   background-color: white;
+  margin-left: auto;
+  margin-right:auto;
 }
 th, td{
   border: 1px solid black;
@@ -117,6 +122,9 @@ th, td{
 }
 .imgB{
   width:40px;
+ }
+ .imgA{
+  width:15px;
  }
 /*--------------*/
 /*PAGE INDEX*/
@@ -269,6 +277,9 @@ th, td{
   #LMt1{
     grid-column: 1/4;
     grid-row: 1;
+   }
+   #LMt2{
+    font-size: 10px;
    }
    #LMl1{
     grid-column: 1/4;

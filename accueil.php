@@ -21,7 +21,7 @@ if (!isset($_SESSION['nom'])){
         <!--Lien-->
         <div class="DivHnav">
             <nav class="listH">
-                <a href="./accueil.php">Accueil</a>
+                <a href="./accueil.php" class="menuA">Accueil</a>
                 <a href="./ListeJoueur.php">Liste des joueurs</a>
                 <a href="./ListeMatch.php">Liste des matchs</a>
                 <a href="./Statistiques.php">Statistiques</a>

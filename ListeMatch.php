@@ -24,7 +24,7 @@ if (!isset($_SESSION['nom'])){
             <nav class="listH">
                 <a href="./accueil.php">Accueil</a>
                 <a href="./ListeJoueur.php">Liste des joueurs</a>
-                <a href="./ListeMatch.php">Liste des matchs</a>
+                <a href="./ListeMatch.php" class="menuA">Liste des matchs</a>
                 <a href="./Statistiques.php">Statistiques</a>
             </nav>
             </div>
@@ -74,6 +74,14 @@ if (!isset($_SESSION['nom'])){
                         ?>
                     </tbody>
                 </table>
+            <div class="titre" id="LMt2">
+                <img class='imgA' src='./img/modifierrouge.png' alt='ModifierInterdit'>Résultat Match Impossible
+                <img class='imgA' src='./img/modifierorange.png' alt='ModifierAFaire'> Résultat Modifiable
+                <img class='imgA' src='./img/modifierN.png' alt='ModifierFini'> Résultat Noté
+                <img class='imgA' src='./img/FeuilleMorange.png' alt='FeuilleMAFaire'> Feuille Match à faire
+                <img class='imgA'src='./img/FeuilleMvert.png' alt='FeuilleMFait'> Feuille Match Notée
+                <img class='imgA' src='./img/FeuilleM.png' alt='FeuilleMFini'> Feuille Match Passée
+            </div>
             </div>
             <a href="./AjoutMatch.php" class="button1" id="LMb1">Ajouter un Match</a> 
         </div>

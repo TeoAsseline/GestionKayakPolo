@@ -125,7 +125,12 @@ if (!isset($_SESSION['nom'])){
                                 echo "<label for='resultat'>Resultat</label>";
                                 echo "<input type='text' name='resultat' id='resultat' value='' placeholder='Match Non Terminé' readonly>";
                                 echo "</div>";
-                            }else{
+                            }else if($resultat != ''){
+                                echo "<div id='FMMd9'>";
+                                echo "<label for='resultat'>Resultat</label>";
+                                echo "<input type='text' name='resultat' id='resultat' value='$resultat' readonly>";
+                                echo "</div>";
+                            }else {
                                 echo "<div id='FMMd7'>";
                                 echo "<label for='resultat'>Resultat</label>";
                                 echo "<select name='resultat' id='resultat' placeholder='Entrez le resultat' required>
