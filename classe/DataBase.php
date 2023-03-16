@@ -3,10 +3,6 @@
 class Database {
     private static $instance = null;
     ///Connexion au serveur Mysql
-    private $server = 'sql926.main-hosting.eu';
-    private $login = 'u563109936_asselner';
-    private $mdp = 'N4YyQYxc38m5x59M';
-    private $db = 'u563109936_KayakPolo_TA';
     private $linkpdo;
     ///Construction du lien
     private function __construct() {
