@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 27 jan. 2023 à 22:54
--- Version du serveur : 10.6.10-MariaDB-cll-lve
--- Version de PHP : 7.2.34
+-- Généré le : jeu. 08 fév. 2024 à 17:46
+-- Version du serveur : 5.7.40
+-- Version de PHP : 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,16 +18,17 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `u563109936_KayakPolo_TA`
+-- Base de données : `kayakpolo`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Joueur`
+-- Structure de la table `joueur`
 --
 
-CREATE TABLE `Joueur` (
+DROP TABLE IF EXISTS `joueur`;
+CREATE TABLE IF NOT EXISTS `joueur` (
   `Nom` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Prenom` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Photo` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -37,14 +38,15 @@ CREATE TABLE `Joueur` (
   `Poids` smallint(6) NOT NULL,
   `PostePref` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Statut` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `commentaire` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `commentaire` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`NumLicense`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `Joueur`
+-- Déchargement des données de la table `joueur`
 --
 
-INSERT INTO `Joueur` (`Nom`, `Prenom`, `Photo`, `NumLicense`, `DateNaissance`, `Taille`, `Poids`, `PostePref`, `Statut`, `commentaire`) VALUES
+INSERT INTO `joueur` (`Nom`, `Prenom`, `Photo`, `NumLicense`, `DateNaissance`, `Taille`, `Poids`, `PostePref`, `Statut`, `commentaire`) VALUES
 ('Brodoux', 'Martin', 'photo/0011010010.png', '0011010010', '1985-04-11', 177, 67, 'Milieu', 'Absent', ''),
 ('Belat', 'Cristophe', 'photo/1000000000.png', '1000000000', '1991-02-27', 182, 66, 'Attaquant', 'Actif', 'Lancé droit a améliorer'),
 ('Lalliot', 'Matthieu', 'photo/1010101010.png', '1010101010', '1981-04-01', 189, 81, 'Defenseur', 'Actif', 'Super récupération de balle'),
@@ -59,25 +61,28 @@ INSERT INTO `Joueur` (`Nom`, `Prenom`, `Photo`, `NumLicense`, `DateNaissance`, `
 -- --------------------------------------------------------
 
 --
--- Structure de la table `MatchJ`
+-- Structure de la table `matchj`
 --
 
-CREATE TABLE `MatchJ` (
+DROP TABLE IF EXISTS `matchj`;
+CREATE TABLE IF NOT EXISTS `matchj` (
   `DateM` date NOT NULL,
   `HeureM` time NOT NULL,
   `NomEquipeAdv` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Lieu` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Resultat` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `IDmatch` int(11) NOT NULL,
+  `IDmatch` int(11) NOT NULL AUTO_INCREMENT,
   `Adresse` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Ville` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `Ville` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`IDmatch`),
+  KEY `IDmatch` (`IDmatch`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `MatchJ`
+-- Déchargement des données de la table `matchj`
 --
 
-INSERT INTO `MatchJ` (`DateM`, `HeureM`, `NomEquipeAdv`, `Lieu`, `Resultat`, `IDmatch`, `Adresse`, `Ville`) VALUES
+INSERT INTO `matchj` (`DateM`, `HeureM`, `NomEquipeAdv`, `Lieu`, `Resultat`, `IDmatch`, `Adresse`, `Ville`) VALUES
 ('2023-05-23', '14:30:00', 'MUC CK', 'Domicile', '', 21, '', ''),
 ('2022-06-08', '16:00:00', 'CKC Saint Omer', 'Exterieur', 'Gagné', 24, '69 rue du coiffeur ', 'Saint Omer'),
 ('2022-10-22', '10:00:00', 'CK Club de l Agenais', 'Exterieur', 'Perdu', 25, '7 route du pécheur', 'Porte-de-Savoie'),
@@ -88,21 +93,24 @@ INSERT INTO `MatchJ` (`DateM`, `HeureM`, `NomEquipeAdv`, `Lieu`, `Resultat`, `ID
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Participer`
+-- Structure de la table `participer`
 --
 
-CREATE TABLE `Participer` (
+DROP TABLE IF EXISTS `participer`;
+CREATE TABLE IF NOT EXISTS `participer` (
   `IDmatch` int(11) NOT NULL,
   `NumLicense` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Performance` tinyint(4) DEFAULT NULL,
-  `Titulaire` tinyint(1) DEFAULT NULL
+  `Titulaire` tinyint(1) DEFAULT NULL,
+  KEY `IDmatch` (`IDmatch`),
+  KEY `NumLicense` (`NumLicense`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `Participer`
+-- Déchargement des données de la table `participer`
 --
 
-INSERT INTO `Participer` (`IDmatch`, `NumLicense`, `Performance`, `Titulaire`) VALUES
+INSERT INTO `participer` (`IDmatch`, `NumLicense`, `Performance`, `Titulaire`) VALUES
 (24, '1111111111', 2, 1),
 (24, '1215738163', 4, 1),
 (24, '1000000000', 4, 1),
@@ -134,49 +142,15 @@ INSERT INTO `Participer` (`IDmatch`, `NumLicense`, `Performance`, `Titulaire`) V
 (21, '1000000000', 0, 1);
 
 --
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `Joueur`
---
-ALTER TABLE `Joueur`
-  ADD PRIMARY KEY (`NumLicense`);
-
---
--- Index pour la table `MatchJ`
---
-ALTER TABLE `MatchJ`
-  ADD PRIMARY KEY (`IDmatch`),
-  ADD KEY `IDmatch` (`IDmatch`);
-
---
--- Index pour la table `Participer`
---
-ALTER TABLE `Participer`
-  ADD KEY `IDmatch` (`IDmatch`),
-  ADD KEY `NumLicense` (`NumLicense`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `MatchJ`
---
-ALTER TABLE `MatchJ`
-  MODIFY `IDmatch` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
 -- Contraintes pour les tables déchargées
 --
 
 --
--- Contraintes pour la table `Participer`
+-- Contraintes pour la table `participer`
 --
-ALTER TABLE `Participer`
-  ADD CONSTRAINT `Participer_ibfk_1` FOREIGN KEY (`IDmatch`) REFERENCES `MatchJ` (`IDmatch`),
-  ADD CONSTRAINT `Participer_ibfk_2` FOREIGN KEY (`NumLicense`) REFERENCES `Joueur` (`NumLicense`);
+ALTER TABLE `participer`
+  ADD CONSTRAINT `Participer_ibfk_1` FOREIGN KEY (`IDmatch`) REFERENCES `matchj` (`IDmatch`),
+  ADD CONSTRAINT `Participer_ibfk_2` FOREIGN KEY (`NumLicense`) REFERENCES `joueur` (`NumLicense`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -3,6 +3,10 @@
 class Database {
     private static $instance = null;
     ///Connexion au serveur Mysql
+    private $server = 'localhost';
+    private $login = 'root';
+    private $mdp = '';
+    private $db = 'kayakpolo';
     private $linkpdo;
     ///Construction du lien
     private function __construct() {
